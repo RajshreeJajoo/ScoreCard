@@ -13,42 +13,140 @@ import {Dropdown} from 'react-native-element-dropdown';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
 const ScoreCardDashboard = () => {
-  const [detailList, setDetailList] = useState([]);
+  const [detailList, setDetailList] = useState([
+    {
+      "firstName":"Demario",
+      "lastName":"Anderson",
+      "scoreInPercentage":11,
+      "section":"science"
+      },
+      {
+      "firstName":"Russell",
+      "lastName":"Breitenberg",
+      "scoreInPercentage":45,
+      "section":"science"
+      },
+      {
+      "firstName":"Alisa",
+      "lastName":"White",
+      "scoreInPercentage":89,
+      "section":"science"
+      },
+      {
+      "firstName":"Jamarcus",
+      "lastName":"Harber",
+      "scoreInPercentage":62,
+      "section":"science"
+      },
+      {
+      "firstName":"Cora",
+      "lastName":"Zboncak",
+      "scoreInPercentage":39,
+      "section":"science"
+      },
+      {
+      "firstName":"Dorthy",
+      "lastName":"Shields",
+      "scoreInPercentage":46,
+      "section":"science"
+      },
+      {
+      "firstName":"Kenny",
+      "lastName":"Cremin",
+      "scoreInPercentage":31,
+      "section":"commerce"
+      },
+      {
+      "firstName":"Eulalia",
+      "lastName":"Johnson",
+      "scoreInPercentage":47,
+      "section":"commerce"
+      },
+      {
+      "firstName":"Zackery",
+      "lastName":"Beer",
+      "scoreInPercentage":36,
+      "section":"science"
+      },
+      {
+      "firstName":"Dedric",
+      "lastName":"Champlin",
+      "scoreInPercentage":55,
+      "section":"science"
+      },
+      {
+      "firstName":"Kody",
+      "lastName":"Kassulke",
+      "scoreInPercentage":62,
+      "section":"commerce"
+      },
+      {
+      "firstName":"Sydney",
+      "lastName":"Goyette",
+      "scoreInPercentage":28,
+      "section":"science"
+      },
+      {
+      "firstName":"Trenton",
+      "lastName":"Dietrich",
+      "scoreInPercentage":26,
+      "section":"science"
+      },
+      {
+        "firstName":"Sydney",
+        "lastName":"Goyette",
+        "scoreInPercentage":34,
+        "section":"science"
+        },
+        {
+        "firstName":"Trenton",
+        "lastName":"Dietrich",
+        "scoreInPercentage":80,
+        "section":"science"
+        },]);
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const [sortDetails, setSortDetails] = useState([]);
   const [color, setColor] = useState();
   const [performance, setPerformance] = useState();
   const [avg, setAvg] = useState(0);
+  const [passStudent,setPassStudent]=useState(0)
   const {navigate} = useNavigation();
 
   useEffect(() => {
-    axios
-      .get('https://cod-students.free.beeceptor.com/student-scores')
-      .then(response => {
-        setDetailList(response.data);
+    // axios
+    //   .get('https://cod-students.free.beeceptor.com/student-scores')
+    //   .then(response => {
+    //     setDetailList(response.data);
         let sum = 0;
+        let number =0;
         {
-          detailList?.data?.map((detail, i) => {
+          // detailList?.data?.map((detail, i) => {
+            detailList?.map((detail, i) => {
+              if(detail.scoreInPercentage>=40)
+                number = number+1
+                setPassStudent(number)
             sum = sum + detail.scoreInPercentage;
-            return setAvg(sum / detailList.total);
+            // return setAvg((number / detailList.total)*100);
+            return setAvg((number / 15)*100);
+
           });
         }
         if (avg < 40) {
           setColor('red');
           setPerformance('Poor!');
-        } else if (40 < avg < 80) {
+        } else if (avg < 80) {
           setColor('#19BDFF');
           setPerformance('Good!');
-        } else {
-          setColor('green');
+        } else 
+        {  setColor('green');
           setPerformance('Excellent!');
         }
-      })
-      .catch(error => {
-        console.log('error', error);
-      });
-  }, [detailList,avg]);
+      // })
+      // .catch(error => {
+      //   console.log('error', error);
+      // });
+  }, [avg,passStudent]);
 
   const data = [
     {label: 'Name', value: 'Name'},
@@ -61,7 +159,8 @@ const ScoreCardDashboard = () => {
     setIsFocus(false);
     if (item.value === 'Name') {
       setSortDetails(
-        detailList?.data?.sort(function (a, b) {
+        // detailList?.data?.sort(function (a, b) {
+          detailList?.sort(function (a, b) {
           if (a.firstName < b.firstName) {
             return -1;
           }
@@ -73,19 +172,20 @@ const ScoreCardDashboard = () => {
       );
     } else if (item.value === 'Percentage(Asc)') {
       setSortDetails(
-        detailList?.data?.sort(function (a, b) {
+        // detailList?.data?.sort(function (a, b) {
+          detailList?.sort(function (a, b) {
           return a.scoreInPercentage - b.scoreInPercentage;
         }),
       );
     } else {
       setSortDetails(
-        detailList?.data?.sort(function (a, b) {
+        // detailList?.data?.sort(function (a, b) {
+          detailList?.sort(function (a, b) {
           return b.scoreInPercentage - a.scoreInPercentage;
         }),
       );
     }
   };
-  console.log('avg', avg);
   return (
     <>
       <View style={{backgroundColor: 'white', margin: '5%'}}>
@@ -110,7 +210,9 @@ const ScoreCardDashboard = () => {
 
           <Card.Content>
             <Text style={{marginLeft: '18%'}}>
-              of {detailList.total} students passed
+              {/*{passStudent} of {detailList.total} students passed */}
+             {passStudent} of 15 students passed
+
             </Text>
           </Card.Content>
         </Card>
@@ -140,8 +242,8 @@ const ScoreCardDashboard = () => {
       </View>
       <ScrollView>
         <View>
-          {/* <ScrollView> */}
-          {(detailList?.data || sortDetails)?.map((detail, i) => {
+          {/* {(detailList?.data || sortDetails)?.map((detail, i) => { */}
+          {(detailList || sortDetails)?.map((detail, i) => {
             return (
               <View style={{margin: '5%'}} key={i}>
                 <TouchableOpacity
@@ -153,7 +255,6 @@ const ScoreCardDashboard = () => {
                   <Card style={{backgroundColor: 'white'}}>
                     <Card.Title
                       title={detail.firstName}
-                      // subtitle={detail.scoreInPercentage}
                       subtitle={
                         detail.section.charAt(0).toUpperCase() +
                         detail.section.slice(1)
@@ -193,7 +294,6 @@ const ScoreCardDashboard = () => {
               </View>
             );
           })}
-          {/* </ScrollView> */}
         </View>
       </ScrollView>
     </>
