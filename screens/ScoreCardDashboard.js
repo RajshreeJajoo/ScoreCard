@@ -35,9 +35,15 @@ const ScoreCardDashboard = () => {
       {
       "firstName":"Jamarcus",
       "lastName":"Harber",
-      "scoreInPercentage":62,
+      "scoreInPercentage":32,
       "section":"science"
       },
+      {
+        "firstName":"Jamarcus",
+        "lastName":"Harber",
+        "scoreInPercentage":72,
+        "section":"science"
+        },
       {
       "firstName":"Cora",
       "lastName":"Zboncak",
@@ -128,7 +134,7 @@ const ScoreCardDashboard = () => {
                 setPassStudent(number)
             sum = sum + detail.scoreInPercentage;
             // return setAvg((number / detailList.total)*100);
-            return setAvg((number / 15)*100);
+            return setAvg((number / detailList.length)*100);
 
           });
         }
@@ -186,6 +192,8 @@ const ScoreCardDashboard = () => {
       );
     }
   };
+
+  console.log("ln",detailList.length)
   return (
     <>
       <View style={{backgroundColor: 'white', margin: '5%'}}>
@@ -211,7 +219,7 @@ const ScoreCardDashboard = () => {
           <Card.Content>
             <Text style={{marginLeft: '18%'}}>
               {/*{passStudent} of {detailList.total} students passed */}
-             {passStudent} of 15 students passed
+             {passStudent} of {detailList.length} students passed
 
             </Text>
           </Card.Content>
