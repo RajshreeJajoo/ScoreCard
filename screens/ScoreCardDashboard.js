@@ -193,7 +193,6 @@ const ScoreCardDashboard = () => {
     }
   };
 
-  console.log("ln",detailList.length)
   return (
     <>
       <View style={{backgroundColor: 'white', margin: '5%'}}>
