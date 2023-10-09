@@ -31,7 +31,7 @@ const ScoreCardDashboard = () => {
         {
           detailList?.data?.map((detail, i) => {
             sum = sum + detail.scoreInPercentage;
-            return setAvg(sum / 5);
+            return setAvg(sum / detailList.total);
           });
         }
         if (avg < 40) {
@@ -48,7 +48,7 @@ const ScoreCardDashboard = () => {
       .catch(error => {
         console.log('error', error);
       });
-  }, [avg]);
+  }, [detailList,avg]);
 
   const data = [
     {label: 'Name', value: 'Name'},
