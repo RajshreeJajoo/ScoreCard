@@ -6,7 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {useState, useEffect} from 'react';
-import {Avatar, Button, Card} from 'react-native-paper';
+import {Avatar, Card} from 'react-native-paper';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {Dropdown} from 'react-native-element-dropdown';
@@ -21,15 +21,17 @@ const ScoreCardDashboard = () => {
   const [performance, setPerformance] = useState();
   const [avg, setAvg] = useState(0);
   const {navigate} = useNavigation();
+
   useEffect(() => {
-    axios.get('https://cod-students.free.beeceptor.com/student-scores').then(response => {
+    axios
+      .get('https://cod-students.free.beeceptor.com/student-scores')
+      .then(response => {
         setDetailList(response.data);
-        console.log("response",response.data)
         let sum = 0;
         {
           detailList?.data?.map((detail, i) => {
-            sum = sum + detail.scoreInPercentage
-            return setAvg((sum)/5);
+            sum = sum + detail.scoreInPercentage;
+            return setAvg(sum / 5);
           });
         }
         if (avg < 40) {
@@ -83,14 +85,14 @@ const ScoreCardDashboard = () => {
       );
     }
   };
- console.log("avg",avg)
+  console.log('avg', avg);
   return (
     <>
       <View style={{backgroundColor: 'white', margin: '5%'}}>
         <Card style={{backgroundColor: 'white'}}>
           <Card.Title
-            title= "  Average Scorecard"
-            subtitle= {performance}
+            title="  Average Scorecard"
+            subtitle={performance}
             left={props => (
               <CircularProgress
                 value={avg}
@@ -139,7 +141,7 @@ const ScoreCardDashboard = () => {
       <ScrollView>
         <View>
           {/* <ScrollView> */}
-          {((detailList?.data)||sortDetails)?.map((detail, i) => {
+          {(detailList?.data || sortDetails)?.map((detail, i) => {
             return (
               <View style={{margin: '5%'}} key={i}>
                 <TouchableOpacity
@@ -152,7 +154,10 @@ const ScoreCardDashboard = () => {
                     <Card.Title
                       title={detail.firstName}
                       // subtitle={detail.scoreInPercentage}
-                      subtitle= {detail.section.charAt(0).toUpperCase() + detail.section.slice(1)}
+                      subtitle={
+                        detail.section.charAt(0).toUpperCase() +
+                        detail.section.slice(1)
+                      }
                       left={props => (
                         <Avatar.Text
                           {...props}
@@ -170,7 +175,13 @@ const ScoreCardDashboard = () => {
                           progressValueColor="black"
                           maxValue={100}
                           duration={0}
-                          activeStrokeColor={detail.scoreInPercentage<40?'red':detail.scoreInPercentage<80?'#19BDFF':'green'}
+                          activeStrokeColor={
+                            detail.scoreInPercentage < 40
+                              ? 'red'
+                              : detail.scoreInPercentage < 80
+                              ? '#19BDFF'
+                              : 'green'
+                          }
                           title={'%'}
                           titleColor="black"
                           titleStyle={{fontWeight: 'bold'}}

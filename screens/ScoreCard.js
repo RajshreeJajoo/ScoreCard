@@ -1,18 +1,21 @@
 import {View, Text, StyleSheet} from 'react-native';
-import {Avatar, Button, Card} from 'react-native-paper';
+import {Avatar, Card} from 'react-native-paper';
 import {useState} from 'react';
 import Slider from 'react-native-slider';
 
 const ScoreCard = ({route}) => {
   const [scoredetail, setDetail] = useState(route.params.detail);
-  const [modifyScore,setModifyScore] = useState(scoredetail.scoreInPercentage)
+  const [modifyScore, setModifyScore] = useState(scoredetail.scoreInPercentage);
   return (
     <>
       <View style={{margin: '3%', backgroundColor: 'white'}}>
         <Card style={{backgroundColor: 'white'}}>
           <Card.Title
             title={scoredetail.firstName}
-            subtitle= {scoredetail.section.charAt(0).toUpperCase() + scoredetail.section.slice(1)}
+            subtitle={
+              scoredetail.section.charAt(0).toUpperCase() +
+              scoredetail.section.slice(1)
+            }
             left={props => (
               <Avatar.Text
                 {...props}
@@ -36,12 +39,10 @@ const ScoreCard = ({route}) => {
               maximumValue={10}
               minimumTrackTintColor="#19BDFF"
               maximumTrackTintColor="#d3d3d3"
-             onValueChange={value => 
-                { 
-                    setModifyScore(value*10)
-                    console.log(value)
-                }
-             }
+              onValueChange={value => {
+                setModifyScore(value * 10);
+                console.log(value);
+              }}
             />
             <View style={{flexDirection: 'row'}}>
               <Text style={style.textStyle}>Result:</Text>

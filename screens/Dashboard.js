@@ -1,7 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
 import {useEffect, useState} from 'react';
-import {Avatar, Button, Card} from 'react-native-paper';
-import {CircularProgressbar} from 'react-circular-progressbar';
 import ScoreCardDashboard from './ScoreCardDashboard';
 const Dashboard = () => {
   const [wish, setWish] = useState();
@@ -18,7 +16,7 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-      <View style={{marginTop: '10%',marginLeft:'6%'}}>
+      <View style={{marginTop: '10%', marginLeft: '6%'}}>
         <Text style={{fontWeight: 'bold', fontSize: 20, color: 'black'}}>
           {wish}
         </Text>
