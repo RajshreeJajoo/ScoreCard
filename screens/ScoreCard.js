@@ -19,6 +19,7 @@ const ScoreCard = ({route}) => {
             left={props => (
               <Avatar.Text
                 {...props}
+                color="white"
                 size={40}
                 label={scoredetail.firstName[0].toUpperCase()}
                 backgroundColor={
@@ -35,10 +36,10 @@ const ScoreCard = ({route}) => {
             <Slider
               value={modifyScore / 10}
               minimumValue={0}
-              thumbTintColor="#19BDFF"
+              thumbTintColor={modifyScore < 40 ? 'red': modifyScore < 70? '#19BDFF' : 'green'}
               maximumValue={10}
-              minimumTrackTintColor="#19BDFF"
-              maximumTrackTintColor="#d3d3d3"
+              minimumTrackTintColor={modifyScore < 40 ? 'red': modifyScore < 70? '#19BDFF' : 'green'}
+              maximumTrackTintColor="gray"
               onValueChange={value => {
                 setModifyScore(value * 10);
                 console.log(value);
@@ -61,6 +62,7 @@ const ScoreCard = ({route}) => {
 const style = StyleSheet.create({
   textStyle: {
     fontSize: 14,
+    color:'black',
     fontWeight: 'bold',
   },
 });

@@ -30,7 +30,7 @@ const ScoreCardDashboard = () => {
       "firstName":"Alisa",
       "lastName":"White",
       "scoreInPercentage":89,
-      "section":"science"
+      "section":"commerce"
       },
       {
       "firstName":"Jamarcus",
@@ -42,7 +42,7 @@ const ScoreCardDashboard = () => {
         "firstName":"Jamarcus",
         "lastName":"Harber",
         "scoreInPercentage":72,
-        "section":"science"
+        "section":"commerce"
         },
       {
       "firstName":"Cora",
@@ -72,7 +72,7 @@ const ScoreCardDashboard = () => {
       "firstName":"Zackery",
       "lastName":"Beer",
       "scoreInPercentage":36,
-      "section":"science"
+      "section":"commerce"
       },
       {
       "firstName":"Dedric",
@@ -96,7 +96,7 @@ const ScoreCardDashboard = () => {
       "firstName":"Trenton",
       "lastName":"Dietrich",
       "scoreInPercentage":26,
-      "section":"science"
+      "section":"commerce"
       },
       {
         "firstName":"Sydney",
@@ -108,7 +108,7 @@ const ScoreCardDashboard = () => {
         "firstName":"Trenton",
         "lastName":"Dietrich",
         "scoreInPercentage":80,
-        "section":"science"
+        "section":"commerce"
         },]);
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
@@ -198,7 +198,7 @@ const ScoreCardDashboard = () => {
       <View style={{backgroundColor: 'white', margin: '5%'}}>
         <Card style={{backgroundColor: 'white'}}>
           <Card.Title
-            title="  Average Scorecard"
+            title="Average Scorecard"
             subtitle={performance}
             left={props => (
               <CircularProgress
@@ -208,7 +208,6 @@ const ScoreCardDashboard = () => {
                 progressValueColor="black"
                 maxValue={100}
                 activeStrokeColor={color}
-                title={'%'}
                 titleColor="black"
                 titleStyle={{fontWeight: 'bold'}}
               />
@@ -216,7 +215,7 @@ const ScoreCardDashboard = () => {
           />
 
           <Card.Content>
-            <Text style={{marginLeft: '18%'}}>
+            <Text style={{marginLeft: '18%',color: 'black'}}>
               {/*{passStudent} of {detailList.total} students passed */}
              {passStudent} of {detailList.length} students passed
 
@@ -225,21 +224,23 @@ const ScoreCardDashboard = () => {
         </Card>
       </View>
       <View style={{flexDirection: 'row'}}>
-        <Text style={{marginLeft: '6%', fontWeight: 'bold', fontSize: 16}}>
+        <Text style={{marginLeft: '6%', fontWeight: 'bold', fontSize: 16,color: 'black'}}>
           Sort By:
         </Text>
         <View style={{width: '46%', marginLeft: '24%'}}>
           <Dropdown
             style={[styles.dropdown]}
-            placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             // inputSearchStyle={styles.inputSearchStyle}
             // iconStyle={styles.iconStyle}
+            itemTextStyle={{color:'black'}}
             data={data}
+            iconColor='black'
             maxHeight={300}
             labelField="label"
             valueField="value"
             placeholder={!isFocus ? 'Select item' : '...'}
+            placeholderStyle={{color:'black'}}
             value={value}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
@@ -286,11 +287,10 @@ const ScoreCardDashboard = () => {
                           activeStrokeColor={
                             detail.scoreInPercentage < 40
                               ? 'red'
-                              : detail.scoreInPercentage < 80
+                              : detail.scoreInPercentage < 70
                               ? '#19BDFF'
                               : 'green'
                           }
-                          title={'%'}
                           titleColor="black"
                           titleStyle={{fontWeight: 'bold'}}
                         />
@@ -328,6 +328,7 @@ const styles = StyleSheet.create({
   },
   selectedTextStyle: {
     fontSize: 16,
+    color:'black',
     textAlign: 'right',
   },
 });
